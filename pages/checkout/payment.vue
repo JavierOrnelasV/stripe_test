@@ -25,9 +25,11 @@ const checkout = await stripe?.initEmbeddedCheckout({
   clientSecret,
 });
 
-const checkoutDiv = ref<HTMLElement>();
+const checkoutDiv = ref<HTMLElement | undefined>();
 
-if (checkoutDiv.value) {
-  checkout?.mount(checkoutDiv.value);
-}
+onMounted(() => {
+  if (checkoutDiv.value) {
+    checkout?.mount(checkoutDiv.value);
+  }
+});
 </script>
