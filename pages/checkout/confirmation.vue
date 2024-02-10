@@ -17,7 +17,7 @@ const customerEmail = ref("");
 
 const route = useRoute();
 
-const sessionId = route.params.session_id as string;
+const sessionId = route.query.session_id;
 
 // const queryString = window.location.search;
 // const urlParams = new URLSearchParams(queryString);
@@ -31,9 +31,9 @@ const response: any = await useFetch(`/api/checkout/session`, {
 
 const session = response.data.value.data ?? {};
 
-if (session.sessionStatus == "open") {
+if (session.sessionStatus === "open") {
   navigateTo("/checkout/confirmation");
-} else if (session.status == "complete") {
+} else if (session.sessionStatus === "complete") {
   successSection.value = true;
   customerEmail.value = session.customerEmail;
 }

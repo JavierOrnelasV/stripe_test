@@ -5,8 +5,8 @@ const stripeKey = process.env.STRIPE_SERVER_API_KEY ?? "";
 const stripe = new Stripe(stripeKey);
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
-  const sessionId: string = query.session_id as string;
+  const body = await readBody(event);
+  const sessionId: string = body.sessionId;
   const session = await stripe.checkout.sessions.retrieve(sessionId);
 
   if (session.status) {
