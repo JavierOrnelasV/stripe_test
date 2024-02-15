@@ -3,5 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   routeRules: {
     "/checkout/**": { ssr: false },
+    "/custom": { ssr: false },
   },
 });
